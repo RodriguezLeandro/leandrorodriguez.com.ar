@@ -226,6 +226,12 @@ h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.01em; }
   font-size: 1.08rem; margin: 0 0 44px;
 }
 .section-intro strong, .prose strong { color: var(--text); font-weight: 600; }
+.section-intro a, .prose a {
+  color: var(--warm-soft); text-decoration: underline;
+  text-underline-offset: 3px; text-decoration-thickness: 1px;
+  transition: color .2s var(--ease);
+}
+.section-intro a:hover, .prose a:hover { color: var(--warm); }
 
 .prose { max-width: 64ch; }
 .prose p { color: var(--muted); margin: 0 0 22px; }
