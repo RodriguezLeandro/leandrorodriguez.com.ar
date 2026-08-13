@@ -327,6 +327,7 @@ h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.01em; }
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(180deg, transparent 55%, rgba(224, 122, 95, 0.18));
 }
+.media-frame img,
 .media-frame video {
   width: 100%; height: auto; display: block;
   aspect-ratio: 3 / 4; object-fit: cover;
