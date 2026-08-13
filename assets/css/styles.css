@@ -316,6 +316,22 @@ h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.01em; }
 /* ---------- Educación / idiomas ---------- */
 .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 36px; }
 
+/* ---------- Video enmarcado ---------- */
+.media-frame {
+  margin: 0; position: relative;
+  border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.75);
+}
+.media-frame::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, transparent 55%, rgba(224, 122, 95, 0.18));
+}
+.media-frame video {
+  width: 100%; height: auto; display: block;
+  aspect-ratio: 3 / 4; object-fit: cover;
+}
+
 /* ---------- Placeholder de medios ---------- */
 .placeholder-media {
   aspect-ratio: 4 / 5; border-radius: var(--radius);

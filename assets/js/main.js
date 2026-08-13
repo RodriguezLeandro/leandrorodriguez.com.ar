@@ -38,6 +38,15 @@
     });
   }
 
+  /* Respetar "reducir movimiento": no autoreproducir videos decorativos */
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.querySelectorAll("video[autoplay]").forEach(function (v) {
+      v.removeAttribute("autoplay");
+      v.setAttribute("controls", "");
+      v.pause();
+    });
+  }
+
   /* Revelado al hacer scroll */
   var reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && reveals.length) {
