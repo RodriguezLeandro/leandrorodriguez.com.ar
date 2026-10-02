@@ -386,6 +386,8 @@ h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.01em; }
 .journal-media figcaption {
   margin-top: 10px; color: var(--faint); font-size: 0.88rem;
 }
+.journal-media--vertical { max-width: 360px; margin-left: auto; margin-right: auto; }
+.journal-media--vertical figcaption { text-align: center; }
 
 /* ---------- Estados vacíos ---------- */
 .empty-state {
