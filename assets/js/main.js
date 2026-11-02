@@ -56,4 +56,18 @@
   } else {
     reveals.forEach(function (el) { el.classList.add("is-visible"); });
   }
+
+  /* Enlaces directos a entradas de la bitácora (#id): abrir y mostrar la entrada */
+  var openFromHash = function () {
+    var id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target || target.tagName !== "DETAILS") return;
+    target.open = true;
+    var wrapper = target.closest(".reveal");
+    if (wrapper) wrapper.classList.add("is-visible");
+    target.scrollIntoView();
+  };
+  window.addEventListener("hashchange", openFromHash);
+  openFromHash();
 })();
