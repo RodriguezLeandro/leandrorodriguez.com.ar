@@ -52,7 +52,7 @@
       "@type": "CollegeOrUniversity",
       "name": "Universidad de Buenos Aires"
     },
-    "knowsAbout": ["Backend", "Java", "Spring Boot", "Sistemas distribuidos", ".NET", "Ciencias de la Computación", "Bachata", "Actuación", "Desarrollo de videojuegos", "Realidad virtual"],
+    "knowsAbout": ["Backend", "Java", "Spring Boot", "Sistemas distribuidos", ".NET", "Ciencias de la Computación", "Bachata", "Actuación", "Desarrollo de videojuegos", "Realidad virtual", "WebGL", "GLSL"],
     "sameAs": [
       "https://www.instagram.com/lean.bachata/",
       "https://www.linkedin.com/in/leandro-rodriguez",
@@ -94,6 +94,7 @@
 
     <!-- ================= HERO / INICIO ================= -->
     <section class="hero" id="inicio">
+      <canvas class="hero-canvas" data-shader="assets/shaders/flujo.frag" aria-hidden="true"></canvas>
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div class="hero-inner">
@@ -379,15 +380,135 @@
     <section class="section" id="proyectos">
       <div class="wrap">
         <p class="section-kicker reveal">05 — Proyectos</p>
-        <h2 class="section-title reveal">Donde se cruzan los mundos</h2>
+        <h2 class="section-title reveal">Donde el código se vuelve movimiento</h2>
         <p class="section-intro reveal">
-          Un espacio para integrar proyectos de software, videojuegos, realidad virtual,
-          contenido y experimentos que combinan tecnología, arte y movimiento.
+          Proyectos de software y experimentos que cruzan tecnología, arte y movimiento.
+          Primero, un laboratorio de shaders: piezas generativas que se calculan en vivo,
+          píxel por píxel, en la GPU de tu dispositivo.
         </p>
-        <!-- [FALTA INFORMACIÓN]: proyectos concretos (software, videojuegos, VR, contenido) con enlaces y descripciones -->
-        <div class="empty-state reveal">
-          <p>Estoy preparando esta sección.</p>
-          <span>Pronto vas a encontrar acá proyectos reales, con su contexto y sus enlaces.</span>
+
+        <!-- Laboratorio de shaders: el motor está en assets/js/shaders.js y cada pieza en assets/shaders/*.frag -->
+        <div class="lab reveal" id="laboratorio">
+          <div class="lab-tabs" role="tablist" aria-label="Piezas del laboratorio">
+            <button class="lab-tab" type="button" role="tab" id="tab-flujo" aria-selected="true" aria-controls="lab-panel-flujo"
+              data-shader="assets/shaders/flujo.frag" data-mouse="0.62,0.55"
+              data-label="Flujo: ruido fractal en movimiento, con tonos cálidos y fríos que se mezclan como tinta en agua.">
+              <span class="lab-tab-num">01</span> Flujo
+            </button>
+            <button class="lab-tab" type="button" role="tab" id="tab-dos-cuerpos" aria-selected="false" aria-controls="lab-panel-dos-cuerpos" tabindex="-1"
+              data-shader="assets/shaders/dos-cuerpos.frag" data-mouse="0.5,0.5"
+              data-label="Dos cuerpos: dos figuras 3D abrazadas bailan el paso básico de bachata bajo un reflector.">
+              <span class="lab-tab-num">02</span> Dos cuerpos
+            </button>
+            <button class="lab-tab" type="button" role="tab" id="tab-interferencia" aria-selected="false" aria-controls="lab-panel-interferencia" tabindex="-1"
+              data-shader="assets/shaders/interferencia.frag" data-mouse="0.68,0.5"
+              data-label="Interferencia: ondas circulares que se superponen sobre una superficie líquida.">
+              <span class="lab-tab-num">03</span> Interferencia
+            </button>
+          </div>
+
+          <div class="lab-stage">
+            <canvas class="lab-canvas" role="img" aria-label="Flujo: ruido fractal en movimiento, con tonos cálidos y fríos que se mezclan como tinta en agua."></canvas>
+            <p class="lab-fallback">Tu navegador no tiene WebGL disponible, así que no puedo mostrar las piezas en vivo. El código sigue abajo.</p>
+            <p class="lab-error" role="status" hidden></p>
+            <span class="lab-hud" data-hud aria-hidden="true">WebGL</span>
+            <button class="lab-play" type="button" aria-pressed="false">Pausar</button>
+          </div>
+
+          <div class="lab-panel" role="tabpanel" id="lab-panel-flujo" aria-labelledby="tab-flujo">
+            <div class="lab-info">
+              <h3>Flujo</h3>
+              <p>
+                Ruido fractal (fBm) evaluado sobre coordenadas que ya fueron deformadas por otro
+                ruido, dos veces seguidas: la técnica se llama <em>domain warping</em> y el
+                resultado parece tinta disolviéndose en agua. Es la misma pieza que se mueve,
+                más tenue, en el fondo del inicio.
+              </p>
+              <p class="lab-hint">Mové el cursor —o arrastrá el dedo— sobre la pieza: el espacio gira a su alrededor y desvía la corriente.</p>
+            </div>
+            <ul class="lab-tech" aria-label="Técnicas">
+              <li>GLSL</li><li>Ruido de valor</li><li>fBm</li><li>Domain warping</li>
+            </ul>
+          </div>
+
+          <div class="lab-panel" role="tabpanel" id="lab-panel-dos-cuerpos" aria-labelledby="tab-dos-cuerpos" hidden>
+            <div class="lab-info">
+              <h3>Dos cuerpos</h3>
+              <p>
+                Una escena 3D sin mallas ni polígonos: cada figura es una función de distancia
+                (SDF) armada con cápsulas y esferas, y la imagen sale de lanzar un rayo por
+                píxel con <em>ray marching</em>. Las dos figuras bailan en posición cerrada el
+                paso básico de bachata a 130 BPM —tres pasos y un tap, hacia un lado y hacia
+                el otro—, bajo un reflector con sombras suaves y un haz de luz volumétrico.
+              </p>
+              <p class="lab-hint">Mové el cursor —o arrastrá en horizontal— para girar la cámara alrededor de la pareja.</p>
+            </div>
+            <ul class="lab-tech" aria-label="Técnicas">
+              <li>Ray marching</li><li>SDF</li><li>Unión suave</li><li>Sombras suaves</li><li>Oclusión ambiental</li>
+            </ul>
+          </div>
+
+          <div class="lab-panel" role="tabpanel" id="lab-panel-interferencia" aria-labelledby="tab-interferencia" hidden>
+            <div class="lab-info">
+              <h3>Interferencia</h3>
+              <p>
+                Ondas circulares que se suman: donde dos crestas coinciden la superficie se
+                eleva, y donde una cresta encuentra un valle se cancelan. La luz se calcula con
+                la normal de la superficie, que sale de la derivada analítica de cada onda.
+              </p>
+              <p class="lab-hint">Una de las fuentes sigue a tu cursor. Hacé click —o tocá— para soltar gotas y ver cómo se cruzan los frentes.</p>
+            </div>
+            <ul class="lab-tech" aria-label="Técnicas">
+              <li>Superposición</li><li>Derivadas analíticas</li><li>Iluminación especular</li><li>Uniform arrays</li>
+            </ul>
+          </div>
+
+          <details class="lab-code">
+            <summary>Ver el código GLSL · <span data-code-name>flujo.frag</span></summary>
+            <pre><code data-code>Cargando…</code></pre>
+            <a class="lab-code-link" data-code-link data-base="https://github.com/RodriguezLeandro/leandrorodriguez.com.ar/blob/main/"
+              href="https://github.com/RodriguezLeandro/leandrorodriguez.com.ar/blob/main/assets/shaders/flujo.frag"
+              target="_blank" rel="noopener">Ver el archivo en GitHub ↗</a>
+          </details>
+        </div>
+
+        <h3 class="sub-title reveal">Otros proyectos</h3>
+        <!-- Para sumar más (VR, contenido, actuación): copiar una tarjeta. Solo proyectos reales, con su enlace. -->
+        <div class="card-grid project-grid reveal">
+          <article class="card project-card">
+            <p class="project-meta">Videojuego · Java</p>
+            <h3>ShootBossBunnyes</h3>
+            <p>Juego de plataformas y acción estilo Megaman: hay que derrotar a todos los jefes. Rediseñado con una estética neón synthwave.</p>
+            <ul class="project-stack" aria-label="Tecnologías">
+              <li>Java</li><li>libGDX</li><li>Box2D</li><li>Gradle</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://leandrorodriguez.itch.io/shootbossbunnyes" target="_blank" rel="noopener">Jugar en itch.io ↗</a>
+              <a href="https://github.com/RodriguezLeandro/ShootBossBunnyes" target="_blank" rel="noopener">Código ↗</a>
+            </div>
+          </article>
+          <article class="card project-card">
+            <p class="project-meta">Backend · Desafío técnico</p>
+            <h3>Detector de ADN mutante</h3>
+            <p>Desafío técnico de Mercado Libre: detectar ADN mutante en una matriz N×N en tiempo lineal y memoria O(1), expuesto como API REST con estadísticas sobre AWS.</p>
+            <ul class="project-stack" aria-label="Tecnologías">
+              <li>Java</li><li>Spring Boot</li><li>AWS</li><li>DynamoDB</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/RodriguezLeandro/MercadolibreChallenge" target="_blank" rel="noopener">Código ↗</a>
+            </div>
+          </article>
+          <article class="card project-card">
+            <p class="project-meta">Web · Sin dependencias</p>
+            <h3>Este sitio</h3>
+            <p>HTML, CSS y JavaScript sin frameworks ni paso de build, con el laboratorio en WebGL puro. Publicado con GitHub Pages y DNS en Cloudflare.</p>
+            <ul class="project-stack" aria-label="Tecnologías">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>WebGL</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://github.com/RodriguezLeandro/leandrorodriguez.com.ar" target="_blank" rel="noopener">Código ↗</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -610,5 +731,6 @@
   </footer>
 
   <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/shaders.js" defer></script>
 </body>
 </html>
