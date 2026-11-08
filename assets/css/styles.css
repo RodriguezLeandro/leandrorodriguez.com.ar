@@ -528,6 +528,7 @@ h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.01em; }
     radial-gradient(60% 120% at 0% 100%, rgba(139, 139, 255, 0.12), transparent 62%),
     var(--surface);
 }
+.soft-note + .teach-callout { margin-top: 36px; }
 .teach-callout--final { margin: 0; padding: 44px 44px; }
 .teach-kicker {
   margin: 0 0 12px; text-transform: uppercase;
