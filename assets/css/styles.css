@@ -518,6 +518,61 @@ h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.01em; }
 }
 .project-links a:hover { color: var(--warm); }
 
+/* ---------- Clases particulares ---------- */
+.teach-callout {
+  display: grid; grid-template-columns: 1fr auto; gap: 24px 48px; align-items: center;
+  margin: 0 0 36px; padding: 34px 36px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background:
+    radial-gradient(70% 120% at 100% 0%, rgba(224, 122, 95, 0.16), transparent 62%),
+    radial-gradient(60% 120% at 0% 100%, rgba(139, 139, 255, 0.12), transparent 62%),
+    var(--surface);
+}
+.teach-callout--final { margin: 0; padding: 44px 44px; }
+.teach-kicker {
+  margin: 0 0 12px; text-transform: uppercase;
+  letter-spacing: 0.18em; font-size: 12px; font-weight: 600; color: var(--warm-soft);
+}
+.teach-title {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.15; letter-spacing: -0.01em;
+  margin: 0 0 12px;
+}
+.teach-callout p { margin: 0 0 12px; color: var(--muted); max-width: 60ch; }
+.teach-callout p:last-child { margin-bottom: 0; }
+.teach-list { margin: 0 0 14px; padding-left: 1.3em; color: var(--text); }
+.teach-list li { padding: 3px 0; }
+.teach-list li::marker { color: var(--warm); font-weight: 600; }
+.teach-actions { display: flex; flex-direction: column; gap: 12px; }
+
+.hero--compact { min-height: 0; padding: 120px 0 130px; }
+.hero--compact > .wrap { position: relative; z-index: 1; }
+.hero-inner--wide { max-width: 760px; }
+.hero-title--compact { font-size: clamp(2.6rem, 7vw, 4.6rem); }
+
+.card .card-kicker {
+  margin: 0 0 10px; text-transform: uppercase;
+  letter-spacing: 0.14em; font-size: 0.78rem; font-weight: 600; color: var(--warm-soft);
+}
+
+.feature-grid--two { grid-template-columns: repeat(2, 1fr); }
+.feature .feature-text { margin: 0; color: var(--muted); }
+
+.steps {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+  margin: 0 0 18px; padding: 0; list-style: none;
+}
+.steps li {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 26px 24px;
+}
+.step-num {
+  display: block; margin-bottom: 14px;
+  font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--warm);
+}
+.steps h3 { font-family: var(--font-display); font-size: 1.18rem; margin-bottom: 8px; }
+.steps p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
 /* ---------- Estados vacíos ---------- */
 .empty-state {
   border: 1px dashed var(--line); border-radius: var(--radius);
@@ -598,6 +653,15 @@ a.contact-card:hover { transform: translateY(-3px); border-color: var(--warm); }
 
   .lab-panel { grid-template-columns: 1fr; padding-top: 24px; }
   .lab-code pre { font-size: 12px; max-height: 380px; }
+
+  .teach-callout, .teach-callout--final { grid-template-columns: 1fr; padding: 28px 24px; }
+  .teach-actions { flex-direction: row; flex-wrap: wrap; }
+  .hero--compact { padding: 64px 0 80px; }
+  .feature-grid--two { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+}
+@media (min-width: 561px) and (max-width: 860px) {
+  .steps { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
   .lab-stage { aspect-ratio: 1 / 1; }

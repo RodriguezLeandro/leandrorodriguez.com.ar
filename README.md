@@ -7,7 +7,8 @@ Web estática (HTML + CSS + JS, sin build ni dependencias). Accesible, responsiv
 
 ```
 .
-├── index.html            # Página única con todas las secciones
+├── index.html            # Página principal con todas las secciones
+├── clases/index.html     # Clases particulares de programación e IA (/clases/)
 ├── assets/
 │   ├── css/styles.css     # Estilos
 │   ├── js/main.js         # Menú móvil, revelado al scroll, header
